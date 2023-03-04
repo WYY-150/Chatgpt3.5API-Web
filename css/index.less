@@ -1,0 +1,104 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    header {
+        height: 72px;
+        background-color: rgb(237, 237, 237);
+        border-bottom: 1px solid rgb(137, 137, 137);
+        h2{
+            margin-left: 15px;
+            line-height: 72px;
+        }
+    }
+
+    main {
+        overflow: auto;
+        flex-grow: 1;
+        background-color: rgb(237, 237, 237);
+
+        .container {
+       
+                
+                .response {
+                    position: relative;
+                    // height: 76px;
+                    margin: 10px;
+                    .answer {
+                        display: inline-block;
+                        white-space: pre-wrap;
+                        // position: absolute;
+                        left: 0;
+                        // width: auto;
+                        height: auto;
+                        max-width: 60%;
+                        padding: 15px 25px;
+                        
+                        background-color: rgb(255, 255, 255);
+                        color: #000;
+                        border: 1px solid #ccc;
+                        border-radius: 12px;
+
+                    }
+                }
+
+                .request {
+                    position: relative;
+                    // height: 76px;
+                    margin: 10px;
+                    .question {
+                        display: inline-block;
+                        white-space: pre-wrap;
+                        position: absolute;
+               
+                        width: auto;
+                        max-width: 60%;
+                        right: 0;
+                        padding: 15px 25px;
+                 
+                        background-color: rgb(183, 232, 135);
+                        background-color: #333333;
+                        color: white;
+                        border: 1px solid #ccc;
+                        border-radius: 12px;
+                    }
+                }
+            
+
+        }
+    }
+    footer{
+        display: flex;
+        height: 72px;
+        // background-color: rgb(247, 247, 247);
+        // border-top: 1px solid rgb(137, 137, 137);
+
+        .inputText{
+            font-size: 20px;
+            height: 100%;
+            flex-grow: 1;
+            padding: 15px 20px;
+            box-sizing: border-box;
+        }
+        .send{
+            font-size: 18px;
+            opacity: 0.8;
+            border: 0;
+            border-top: 1px solid rgb(136, 136, 136);
+            cursor: pointer;
+            width: 100px;
+            background-color: #ededed;
+            color: white;
+            // 
+        }
+        .send:hover{
+            opacity: 1;
+        }
+    }
+}
