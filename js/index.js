@@ -7,18 +7,7 @@
     let inputData;
 
     hander()
-    
 
-
-    // //获取sk内容
-    // function getFile() {    
-    //     let xhr = new XMLHttpRequest()
-    //     xhr.open('GET', './sk', false);// 文件路径
-    //     xhr.overrideMimeType("text/html;charset=utf-8");// 默认为utf-8
-    //     xhr.send(null);
-    //     // 获取文件信息(得到的数据是String)
-    //     return xhr.responseText;
-    // }
 
 
     //获取数据
@@ -30,16 +19,13 @@
 
         xhr.open("POST", url, true);
         message.push({"role":"user","content":inputData})
-        // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-        // xhr.setRequestHeader("Content-Type", "application/json");
-        // xhr.setRequestHeader("Authorization", `Bearer ${sk}`);
+      
         xhr.onreadystatechange = function () {
             // console.log("1",message)
             if (xhr.readyState === 4 && xhr.status === 200) {
 
-                // message.pop({"role":"user","content":inputData})
+             
                 let json = JSON.parse(xhr.responseText);
-                // console.log((json.choices[0].message.content))
                 let response = String(json.result);
 
                 message.push({"role":"system","content":response})
