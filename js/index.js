@@ -1,5 +1,5 @@
 ~function () {
-    let sk = getFile()
+    
     let row = document.querySelector('.container')
     let send = document.querySelector('.send')
     let input = document.querySelector('.inputText')
@@ -10,31 +10,34 @@
     
 
 
-    //获取sk内容
-    function getFile() {    
-        let xhr = new XMLHttpRequest()
-        xhr.open('GET', './sk', false);// 文件路径
-        xhr.overrideMimeType("text/html;charset=utf-8");// 默认为utf-8
-        xhr.send(null);
-        // 获取文件信息(得到的数据是String)
-        return xhr.responseText;
-    }
+    // //获取sk内容
+    // function getFile() {    
+    //     let xhr = new XMLHttpRequest()
+    //     xhr.open('GET', './sk', false);// 文件路径
+    //     xhr.overrideMimeType("text/html;charset=utf-8");// 默认为utf-8
+    //     xhr.send(null);
+    //     // 获取文件信息(得到的数据是String)
+    //     return xhr.responseText;
+    // }
 
 
     //获取数据
     function getdata() {
         let xhr = new XMLHttpRequest();
-        let url = "https://api.openai.com/v1/chat/completions";
+        // let url = "https://api.openai.com/v1/chat/completions";
+        let url = "/api/resources/proxys";
+        // let url = "localhost:3000/resources/proxys";
 
         xhr.open("POST", url, true);
         message.push({"role":"user","content":inputData})
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Authorization", `Bearer ${sk}`);
+        // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.setRequestHeader("Authorization", `Bearer ${sk}`);
         xhr.onreadystatechange = function () {
-            // console.log("1",message)
+            
             if (xhr.readyState === 4 && xhr.status === 200) {
 
-                // message.pop({"role":"user","content":inputData})
+                
                 let json = JSON.parse(xhr.responseText);
                 // console.log((json.choices[0].message.content))
                 let response = String(json.choices[0].message.content);
@@ -60,18 +63,9 @@
             }
         }
          
-        // let data = JSON.stringify({
-        //     "model": "gpt-3.5-turbo",
-        //     "messages":[{"role":"user","content":inputData}],
-        //     "max_tokens": 2048,
-        //     "temperature": 0.5,
-        //     "top_p": 1,
-        //     "frequency_penalty": 0,
-        //     "presence_penalty": 0,            
-        // })
+       
 
         //新增上下文功能
-        // console.log("12",message)
         let data = JSON.stringify({
             "model": "gpt-3.5-turbo",
             "messages":message,
@@ -79,7 +73,7 @@
             "temperature": 0.5,
             "top_p": 1,
             "frequency_penalty": 0,
-            "presence_penalty": 0,            
+            "presence_penalty": 0,                 
         })
 
   
