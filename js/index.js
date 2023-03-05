@@ -1,5 +1,5 @@
 ~function () {
-    
+    // let sk = getFile()
     let row = document.querySelector('.container')
     let send = document.querySelector('.send')
     let input = document.querySelector('.inputText')
@@ -34,13 +34,13 @@
         // xhr.setRequestHeader("Content-Type", "application/json");
         // xhr.setRequestHeader("Authorization", `Bearer ${sk}`);
         xhr.onreadystatechange = function () {
-            
+            // console.log("1",message)
             if (xhr.readyState === 4 && xhr.status === 200) {
 
-                
+                // message.pop({"role":"user","content":inputData})
                 let json = JSON.parse(xhr.responseText);
                 // console.log((json.choices[0].message.content))
-                let response = String(json.choices[0].message.content);
+                let response = String(json.result);
 
                 message.push({"role":"system","content":response})
 
@@ -66,19 +66,11 @@
        
 
         //新增上下文功能
-        let data = JSON.stringify({
-            "model": "gpt-3.5-turbo",
-            "messages":message,
-            "max_tokens": 2048,
-            "temperature": 0.5,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0,                 
-        })
-
-  
+        // console.log("12",message)
+        let data = JSON.stringify({           
+            "messages":message,                    
+        })  
         xhr.send(data)
-
     }
 
 
