@@ -8,42 +8,40 @@ class ResourcesController {
   async getres(ctx, next) {
     let responseText
     let reqInstance = axios.create({
-      Headers:{
+      headers:{
         'Content-Type': 'application/json',
         Authorization : `Bearer ${sk}`,
       },
       })
       
-        
+   
     try {
-
-      let {model,messages,max_tokens,temperature,top_p,frequency_penalty,presence_penalty}=ctx.request.body
-
-      console.log(model,messages,max_tokens,temperature,top_p,frequency_penalty,presence_penalty,sk)     
-      try{
-        responseText = await reqInstance.post('https://api.openai.com/v1/chat/completions', {
-        "model":  model,
-        "messages":message,
-        "max_tokens": max_tokens,
-        "temperature":temperature,
-        "top_p": top_p,
-        "frequency_penalty": frequency_penalty,
-        "presence_penalty": presence_penalty,        
-      })
-    
-    }catch(e){
-      console.error(e)
-    }
-      let res=JSON.parse(responseText)
-      console.log(res)
-      ctx.body = {
-         code: '200',
-         responseText
-
+      let { messages} = ctx.request.body;
+      try {
+        responseText = await reqInstance.post('https://api.openai.com/v1/chat/completions', {          
+          "model":"gpt-3.5-turbo",
+          "messages":messages,
+          "max_tokens":2048,
+          "temperature":0.5,
+          "top_p":1,
+          "frequency_penalty":0,
+          "presence_penalty":0          
+        });
+        let res = responseText.data;
+        // console.log("1",res.choices[0].message.content);
+        let result=res.choices[0].message.content
+        // console.log("1",result);
+        ctx.body = {
+          code: 200,
+          result
+        };
+      } catch (e) {
+        console.error(e);
+        return ctx.app.emit('error', new NullError, ctx);
       }
     } catch (error) {
-      console.error(error)
-      return ctx.app.emit('error', NullError, ctx)
+      console.error(error);
+      return ctx.app.emit('error', NullError, ctx);
     }
   }
 }
